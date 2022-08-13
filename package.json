@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm install --legacy-peer-deps",
+    "build": "npm install --legacy-peer-deps",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
