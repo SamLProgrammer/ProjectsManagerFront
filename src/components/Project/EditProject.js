@@ -29,22 +29,18 @@ const statusList = [
 
 const EditProyect = () => {
   const classes = useStyles();
-  const currentTime = new Date();
 
   const [projectId, setProjectIdServe] = useState(0);
   const [projectNAme, setProjectNameServe] = useState("");
-  const [initialDate, setInitialDateServe] = useState("");
-  const [finalDate, setFinalDateServe] = useState("");
   const [statusId, setStatusIdServe] = useState("");
 
   const [Project_Id, setProjectId] = useState(0);
   const [Project_Name, setProyect_name] = useState("");
-  const [Initial_Date, setInitial_date] = useState("");
-  const [Final_Date, setfinal_date] = useState("");
+  const [Initial_Date, setInitial_date] = useState('');
+  const [Final_Date, setfinal_date] = useState('');
   const [Status_Id, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(Project_Name);
 
   const [errors, setErrors] = useState({
     project_nameError: false,
@@ -75,12 +71,15 @@ const EditProyect = () => {
       .then((response) => {
         console.log(response);
         if (response.data) {
+          setStatusIdServe(Status_Id);
           setProjectIdServe(response.data.Project_Id);
-          setProjectNameServe(response.data.Project_Name);
-          setInitialDateServe(response.data.Initial_Date.toLocaleString());
-          setFinalDateServe(response.data.Final_Date.toLocaleString());
-          setStatusIdServe(response.data.Status_Id);
-          console.log(response.data.Project_Name);
+          setProyect_name(response.data.Project_Name);
+          setInitial_date(response.data.Initial_Date.toLocaleString());
+          setfinal_date(response.data.Final_Date.toLocaleString());
+          setProject_Status(response.data.Status_Id)
+          console.log(statusId);
+          console.log(response.data.Status_Id);
+          console.log("a ver que pedo con el estatus: ", statusIndex());
         }
       })
       .catch((error) => {});
@@ -90,18 +89,34 @@ const EditProyect = () => {
     getStoredProject();
   }, []);
 
-  function statusIndex() {
-    switch (statusId) {
-      case "F":
-        return statusList[0];
+  console.log("Status seteado : ", Status_Id);
 
-      case "P":
-        return statusList[1];
-
-      case "E":
-        return statusList[2];
-      default:
+  const statusIndex = () => {
+    console.log("El estado del proyecto ers : ", Status_Id);
+    if(Status_Id === "F"){
+      console.log("Estado F ", Status_Id);
+      return statusList[0].label; 
+    }else if (Status_Id === "E"){
+      console.log("Estado ", Status_Id);
+      return statusList[2].label;
+    }else if (Status_Id === "P"){
+      console.log("Estado ", Status_Id);
+      return statusList[1].label;
+    }else {
+      return "Pendiente"
     }
+    // switch (Status_Id) {
+    //   case "F":
+    //     console.log("Estado ", Status_Id);
+    //     return statusList[0].label;
+    //   case "P":
+    //     console.log("Estado ", Status_Id);
+    //     return statusList[1].label;
+    //   case "E":
+    //     console.log("Estado ", Status_Id);
+    //     return statusList[2].label;
+    //   default:
+    // }
   }
 
   function handleStatus(value) {
@@ -238,7 +253,7 @@ const EditProyect = () => {
               name: "Project_Name",
               inputType: "text",
               ph: "",
-              defaultValue: projectNAme,
+              defaultValue: Project_Name,
             }}
             handleChange={handleChange}
             param={errors.project_nameError}
@@ -251,7 +266,7 @@ const EditProyect = () => {
             <Item text="Fecha de inicio" />
             <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
-              value={initialDate}
+              value={Initial_Date}
               onChange={handleChangeInitialDate}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -263,7 +278,7 @@ const EditProyect = () => {
             <Item text="Fecha final" />
             <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
-              value={finalDate}
+              value={Final_Date}
               onChange={handleChangeFinalDate}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -276,7 +291,7 @@ const EditProyect = () => {
           <Select
             className="select"
             options={statusList}
-            defaultValue={statusIndex}
+            defaultValue={statusIndex()}
             onChange={handleStatus}
           />
           {errors.project_statusError && (
