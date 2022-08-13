@@ -230,7 +230,8 @@ const EditProyect = () => {
           Status_Id: Status_Id,
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          console.clog(res)})
         .then(
           (result) => {
             if (result) {
