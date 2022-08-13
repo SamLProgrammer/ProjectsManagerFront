@@ -258,7 +258,7 @@ const EditProyect = () => {
       {created && <Navigate to="/admin/proyectList " />}
       <div className="createUserContent">
         <div className="formCreateProyect">
-          {screenWidth > 1030 && <Title text="Editar Proyecto" />}
+          {screenWidth > 1030 && <Title text="Editarrrr Proyecto" />}
 
           <Item text="Nombre del proyecto" />
           <Input
