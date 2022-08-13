@@ -260,11 +260,12 @@ const CreateUser = () => {
         }),
       })
         .then((res) => {
-          JSON.stringify(res);
-          // alert(res);
+          // JSON.stringify(res);
+          console.log(res);
         })
         .then(
           (result) => {
+            console.log(result);
             // alert(JSON.stringify(result));
           },
           (error) => {
