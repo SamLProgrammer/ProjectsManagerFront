@@ -24,7 +24,7 @@ export default class Statistics extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://localhost:1337/getUsers";
+    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getUsers";
     let auxList = [];
     axios
       .get(baseUrl)
@@ -62,7 +62,7 @@ export default class Statistics extends Component {
 
   sendParametersEmployee(userId) {
     console.log("Envia información del  usuario");
-    let url = "http://localhost:1337/hoursStatsPerUser";
+    let url = "https://projectsmanagerfront.herokuapp.com/hoursStatsPerUser";
     axios
       .post(url, {
         initial_time: this.state.initial_date,

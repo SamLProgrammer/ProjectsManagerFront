@@ -145,7 +145,7 @@ const Activity = () => {
   }
 
   const getStoredActivity = () => {
-    let url = "http://localhost:1337/getStoredActivity";
+    let url = "https://projectsmanagerfront.herokuapp.com/getStoredActivity";
     axios.get(url)
     .then((response) => {
       console.log(response);
@@ -207,7 +207,7 @@ const Activity = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:1337/editActivity", {
+      fetch("https://projectsmanagerfront.herokuapp.com/editActivity", {
         method: "POST",
         headers: {
           Accept: "application/json",

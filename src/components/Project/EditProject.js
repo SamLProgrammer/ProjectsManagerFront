@@ -65,7 +65,7 @@ const EditProyect = () => {
   };
 
   const getStoredProject = () => {
-    let url = "http://localhost:1337/getStoredProject";
+    let url = "https://projectsmanagerfront.herokuapp.com/getStoredProject";
     axios
       .get(url)
       .then((response) => {
@@ -77,6 +77,18 @@ const EditProyect = () => {
           setInitial_date(response.data.Initial_Date.toLocaleString());
           setfinal_date(response.data.Final_Date.toLocaleString());
           setProject_Status(response.data.Status_Id)
+          if(response.data === "F"){
+            console.log("Estado F ", Status_Id);
+            return statusList[0].label; 
+          }else if (Status_Id === "E"){
+            console.log("Estado ", Status_Id);
+            return statusList[2].label;
+          }else if (Status_Id === "P"){
+            console.log("Estado ", Status_Id);
+            return statusList[1].label;
+          }else {
+            return "Pendiente"
+          }
           console.log(statusId);
           console.log(response.data.Status_Id);
           console.log("a ver que pedo con el estatus: ", statusIndex());
@@ -97,10 +109,10 @@ const EditProyect = () => {
       console.log("Estado F ", Status_Id);
       return statusList[0].label; 
     }else if (Status_Id === "E"){
-      console.log("Estado ", Status_Id);
+      console.log("Estado E", Status_Id);
       return statusList[2].label;
     }else if (Status_Id === "P"){
-      console.log("Estado ", Status_Id);
+      console.log("Estado P", Status_Id);
       return statusList[1].label;
     }else {
       return "Pendiente"
@@ -203,7 +215,7 @@ const EditProyect = () => {
         Status_Id: Status_Id,
       });
       console.log(aux);
-      fetch("http://localhost:1337/editProject", {
+      fetch("https://projectsmanagerfront.herokuapp.com/editProject", {
         method: "POST",
         headers: {
           Accept: "application/json",

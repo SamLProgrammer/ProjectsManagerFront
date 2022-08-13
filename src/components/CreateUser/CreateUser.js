@@ -238,7 +238,7 @@ const CreateUser = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:1337/createUser", {
+      fetch("https://projectsmanagerfront.herokuapp.com/createUser", {
         method: "POST",
         headers: {
           Accept: "application/json",
