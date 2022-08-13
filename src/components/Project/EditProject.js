@@ -31,13 +31,14 @@ const EditProyect = () => {
   const classes = useStyles();
   const currentTime = new Date();
 
-  let projectId;
+  const [projectId, setProjectId] = useState(0);
   const [project_name, setProyect_name] = useState("");
   const [initial_date, setInitial_date] = useState("");
   const [final_date, setfinal_date] = useState("");
   const [project_status, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(project_name);
 
   const [errors, setErrors] = useState({
     project_nameError: false,
@@ -69,7 +70,7 @@ const EditProyect = () => {
       .then((response) => {
         console.log(response);
         if (response.data) {
-          projectId = response.data.Project_Id;
+          setProjectId(response.data.Project_Id);
           setProyect_name(response.data.Project_Name);
           setInitial_date(response.data.Initial_Date);
           setfinal_date(response.data.Final_Date);
