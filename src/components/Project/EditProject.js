@@ -65,7 +65,7 @@ const EditProyect = () => {
   };
 
   const getStoredProject = () => {
-    let url = "https://projectsmanagerfront.herokuapp.com/getStoredProject";
+    let url = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getStoredProject";
     axios
       .get(url)
       .then((response) => {
@@ -215,7 +215,7 @@ const EditProyect = () => {
         Status_Id: Status_Id,
       });
       console.log(aux);
-      fetch("https://projectsmanagerfront.herokuapp.com/editProject", {
+      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -258,7 +258,7 @@ const EditProyect = () => {
       {created && <Navigate to="/admin/proyectList " />}
       <div className="createUserContent">
         <div className="formCreateProyect">
-          {screenWidth > 1030 && <Title text="Editarrrr Proyecto" />}
+          {screenWidth > 1030 && <Title text="Edita Proyecto" />}
 
           <Item text="Nombre del proyecto" />
           <Input

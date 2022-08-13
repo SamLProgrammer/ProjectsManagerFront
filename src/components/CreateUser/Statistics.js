@@ -24,7 +24,7 @@ export default class Statistics extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getUsers";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
     let auxList = [];
     axios
       .get(baseUrl)
@@ -62,7 +62,7 @@ export default class Statistics extends Component {
 
   sendParametersEmployee(userId) {
     console.log("Envia información del  usuario");
-    let url = "https://projectsmanagerfront.herokuapp.com/hoursStatsPerUser";
+    let url = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/hoursStatsPerUser";
     axios
       .post(url, {
         initial_time: this.state.initial_date,

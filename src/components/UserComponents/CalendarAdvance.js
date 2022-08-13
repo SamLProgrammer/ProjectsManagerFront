@@ -21,7 +21,7 @@ export default class CalendarAdvance extends Component {
   };
 
   getAdvancesForUser() {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getAdvancesByUser";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {

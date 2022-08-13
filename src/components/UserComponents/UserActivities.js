@@ -38,7 +38,7 @@ export default class UserActivities extends Component {
   };
 
   getActivitiesUser() {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getAllActivityUser";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAllActivityUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {

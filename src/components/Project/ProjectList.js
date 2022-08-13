@@ -27,7 +27,7 @@ export default class ProjectList extends Component {
   }
 
   getAllProjects() {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getProjects";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjects";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -52,7 +52,7 @@ export default class ProjectList extends Component {
   }
 
   deletProject(projectId) {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/deleteProject";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteProject";
     axios
       .post(baseUrl, {
         project_id: projectId,        
@@ -64,7 +64,7 @@ export default class ProjectList extends Component {
   }
 
   getProjectToEdit(projectId) {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getProjectToEdit";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjectToEdit";
     axios.post(baseUrl, { project_id: projectId }).then((response) => {
       if (response.data[0]) {
       } else {

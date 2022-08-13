@@ -28,7 +28,7 @@ export default class AdvanceList extends Component {
   };
 
   getAdvacesForUser() {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getAdvancesByUser";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {
@@ -47,7 +47,7 @@ export default class AdvanceList extends Component {
   // }
 
   getAdvancetoEdit(advanceId) {
-    let baseUrl = "https://projectsmanagerfront.herokuapp.com/getAdvanceToEdit";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvanceToEdit";
     console.log(advanceId)
     let data = {advance_id: advanceId}
     console.log(data)

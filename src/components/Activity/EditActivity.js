@@ -145,7 +145,7 @@ const Activity = () => {
   }
 
   const getStoredActivity = () => {
-    let url = "https://projectsmanagerfront.herokuapp.com/getStoredActivity";
+    let url = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getStoredActivity";
     axios.get(url)
     .then((response) => {
       console.log(response);
@@ -207,7 +207,7 @@ const Activity = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("https://projectsmanagerfront.herokuapp.com/editActivity", {
+      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editActivity", {
         method: "POST",
         headers: {
           Accept: "application/json",
