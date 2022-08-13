@@ -269,6 +269,9 @@ const Advance = () => {
             }else if (result.time_off){
               notifyTimeOut();
               setTimeout(() => setCreated(true), 3000);
+            }else if (result.warning === false){
+              notify();
+              setTimeout(() => setCreated(true), 2000);
             }else {
               // notify();
               setTimeout(() => setCreated(true), 2000);
