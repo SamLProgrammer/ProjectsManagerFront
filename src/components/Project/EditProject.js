@@ -304,7 +304,7 @@ const EditProyect = () => {
           <Select
             className="select"
             options={statusList}
-            defaultValue={statusIndex()}
+            defaultValue={"Pendiente"}
             onChange={handleStatus}
           />
           {errors.project_statusError && (

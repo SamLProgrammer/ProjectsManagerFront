@@ -65,12 +65,16 @@ export default class ProjectList extends Component {
 
   getProjectToEdit(projectId) {
     let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjectToEdit";
-    axios.post(baseUrl, { project_id: projectId }).then((response) => {
-      if (response.data[0]) {
-      } else {
-        console.log("NO Entro al response");
-      }
+    let data = {project_id: projectId}
+    axios.post(baseUrl, data).then((response) => {
+      console.log(response);
+      // if (response.data) {
+      // } else {
+      //   console.log("NO Entro al response");
+      // }
     });
+    console.log("data")
+    console.log(data)
   }
   render() {
     return (

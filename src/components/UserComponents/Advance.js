@@ -266,7 +266,6 @@ const Advance = () => {
             }else if(result.time_out_of_bounds){
               notifyTimeOut();
               setTimeout(() => setCreated(true), 3000);
-
             }else if (result.time_off){
               notifyTimeOut();
               setTimeout(() => setCreated(true), 3000);

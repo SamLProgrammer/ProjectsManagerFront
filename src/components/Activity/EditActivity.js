@@ -282,7 +282,7 @@ const Activity = () => {
           <Select
             className="select"
             options={prioritySe}
-            defaultValue={Priority_Id}
+            defaultValue={"Media"}
             onChange={handlePriority}
           />
           {errors.priority_Error && (
@@ -293,7 +293,7 @@ const Activity = () => {
           <Select
             className="select"
             options={statusSe}
-            defaultValue={statusIndex}
+            defaultValue={"Pendiente"}
             onChange={handleStatus}
           />
 

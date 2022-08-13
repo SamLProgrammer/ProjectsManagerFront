@@ -173,11 +173,10 @@ const Activity = (props) => {
           status: status,
         }),
       })
-        .then((res) => res.json())
+        .then((res) => console.log(res))
         .then(
           (result) => {
-            // if(result === "La actividad ya se encuentra registrada"){
-            // }
+            console.log(result)
           },
           (error) => {
             // alert("Registro fallooooo");
