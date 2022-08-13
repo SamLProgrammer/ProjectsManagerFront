@@ -46,7 +46,7 @@ export default class ActivityList extends Component {
 
   getActivitiesPerProject() {
     const cookies = new Cookies();
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivity";
+    let baseUrl = "http://localhost:1337/getActivity";
     let projectId = cookies.get("currentProjectId");
     let data = { project_id: projectId };
     axios
@@ -61,7 +61,7 @@ export default class ActivityList extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
+    let baseUrl = "http://localhost:1337/getUsers";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -82,6 +82,7 @@ export default class ActivityList extends Component {
     // }
     // return '.';
   }
+
   componentDidMount = () => {
     this.getActivitiesPerProject();
     this.getAllUsers();
@@ -93,7 +94,7 @@ export default class ActivityList extends Component {
       user_id: userId,
       initial_time: new Date(),
       final_time: finalDate,}
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/assignActivityToUser";
+    let baseUrl = "http://localhost:1337/assignActivityToUser";
     axios.post(baseUrl, data);
     console.log("envio de assigment")
     console.log(data)
@@ -102,10 +103,10 @@ export default class ActivityList extends Component {
   };
 
   deleteActivity(activityId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteActivity";
+    let baseUrl = "http://localhost:1337/deleteActivity";
     axios
-      .delete(baseUrl, {
-        data: { activity_id: activityId },
+      .post(baseUrl, {
+         activity_id: activityId,
       })
       .then((response) => {
         console.log(response);
@@ -114,19 +115,19 @@ export default class ActivityList extends Component {
   }
 
   getActivityToEdit(activityId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivityToEdit";
+    let baseUrl = "http://localhost:1337/getActivityToEdit";
     axios.post(baseUrl, { activity_id: activityId }).then((response) => {
-      if (response.data) {
-        localStorage.setItem("activity_id", response.data.Activity_Id);
-        localStorage.setItem("activity_name", response.data.Activity_Name);
-        localStorage.setItem(
-          "activity_estimated_Hours",
-          response.data.Estimated_Hours
-        );
-        localStorage.setItem("activity_priority_Id", response.data.Priority_Id);
-        localStorage.setItem("activity_status_Id", response.data.Status_Id);
-        console.log("entro:" + response.data.Status_Id);
-      }
+      // if (response.data) {
+        // localStorage.setItem("activity_id", response.data.Activity_Id);
+        // localStorage.setItem("activity_name", response.data.Activity_Name);
+        // localStorage.setItem(
+        //   "activity_estimated_Hours",
+        //   response.data.Estimated_Hours
+        // );
+        // localStorage.setItem("activity_priority_Id", response.data.Priority_Id);
+        // localStorage.setItem("activity_status_Id", response.data.Status_Id);
+        // console.log("entro:" + response.data.Status_Id);
+      // }
     });
     this.getActivitiesPerProject();
   }

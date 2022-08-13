@@ -238,7 +238,7 @@ const CreateUser = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createUser", {
+      fetch("http://localhost:1337/createUser", {
         method: "POST",
         headers: {
           Accept: "application/json",

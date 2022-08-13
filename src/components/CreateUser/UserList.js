@@ -30,7 +30,7 @@ export default class Prueba extends Component {
   }
 
   selectUser(userId) {
-    let baseUrl = 'http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteUser'
+    let baseUrl = 'http://localhost:1337/deleteUser'
     axios.post(baseUrl, {
         User_Id : userId})
     .then((response) => {
@@ -40,7 +40,7 @@ export default class Prueba extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
+    let baseUrl = "http://localhost:1337/getUsers";
     axios
       .get(baseUrl)
       .then((response) => {

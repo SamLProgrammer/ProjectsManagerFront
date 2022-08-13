@@ -31,14 +31,20 @@ const EditProyect = () => {
   const classes = useStyles();
   const currentTime = new Date();
 
-  const [projectId, setProjectId] = useState(0);
-  const [project_name, setProyect_name] = useState("");
-  const [initial_date, setInitial_date] = useState("");
-  const [final_date, setfinal_date] = useState("");
-  const [project_status, setProject_Status] = useState("");
+  const [projectId, setProjectIdServe] = useState(0);
+  const [projectNAme, setProjectNameServe] = useState("");
+  const [initialDate, setInitialDateServe] = useState("");
+  const [finalDate, setFinalDateServe] = useState("");
+  const [statusId, setStatusIdServe] = useState("");
+
+  const [Project_Id, setProjectId] = useState(0);
+  const [Project_Name, setProyect_name] = useState("");
+  const [Initial_Date, setInitial_date] = useState("");
+  const [Final_Date, setfinal_date] = useState("");
+  const [Status_Id, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(project_name);
+  console.log(Project_Name);
 
   const [errors, setErrors] = useState({
     project_nameError: false,
@@ -52,8 +58,8 @@ const EditProyect = () => {
     errors.initial_dateError === false &&
     errors.final_dateError === false &&
     errors.project_statusError === false &&
-    project_name.length > 1 &&
-    project_status.length > 0;
+    Project_Name.length > 1 ;
+    // Status_Id.length > 0;
 
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
@@ -63,18 +69,17 @@ const EditProyect = () => {
   };
 
   const getStoredProject = () => {
-    let url =
-      "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getStoredProject";
+    let url = "http://localhost:1337/getStoredProject";
     axios
       .get(url)
       .then((response) => {
         console.log(response);
         if (response.data) {
-          setProjectId(response.data.Project_Id);
-          setProyect_name(response.data.Project_Name);
-          setInitial_date(response.data.Initial_Date);
-          setfinal_date(response.data.Final_Date);
-          setProject_Status(response.data.Status_Id);
+          setProjectIdServe(response.data.Project_Id);
+          setProjectNameServe(response.data.Project_Name);
+          setInitialDateServe(response.data.Initial_Date.toLocaleString());
+          setFinalDateServe(response.data.Final_Date.toLocaleString());
+          setStatusIdServe(response.data.Status_Id);
           console.log(response.data.Project_Name);
         }
       })
@@ -86,7 +91,7 @@ const EditProyect = () => {
   }, []);
 
   function statusIndex() {
-    switch (project_status) {
+    switch (statusId) {
       case "F":
         return statusList[0];
 
@@ -140,7 +145,7 @@ const EditProyect = () => {
 
   function handleChange(name, value) {
     switch (name) {
-      case "project_name":
+      case "Project_Name":
         if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, project_nameError: true });
         } else {
@@ -149,7 +154,7 @@ const EditProyect = () => {
         }
         break;
 
-      case "project_status":
+      case "Status_Id":
         if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, project_statusError: true });
         } else {
@@ -165,40 +170,44 @@ const EditProyect = () => {
 
   function handleSubmit() {
     setIsLoading(true);
-    let account = { project_name, initial_date, final_date, project_status };
+    let account = {
+      Project_Id: Project_Id,
+      Project_Name: Project_Name,
+      Initial_Date: Initial_Date,
+      Final_Date: Final_Date,
+      Status_Id: Status_Id,
+    };
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
       let aux = JSON.stringify({
-        project_id: projectId,
-        project_name: project_name,
-        initial_date: initial_date,
-        final_date: final_date,
-        status_id: project_status,
+        Project_Id: Project_Id,
+        Project_Name: Project_Name,
+        Initial_Date: Initial_Date,
+        Final_Date: Final_Date,
+        Status_Id: Status_Id,
       });
       console.log(aux);
-      fetch(
-        "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+      fetch("http://localhost:1337/editProject", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
 
-          body: JSON.stringify({
-            project_id: projectId,
-            project_name: project_name,
-            initial_date: initial_date,
-            final_date: final_date,
-            status_id: project_status,
-          }),
-        }
-      )
+        body: JSON.stringify({
+          Project_Id: projectId,
+          Project_Name: Project_Name,
+          Initial_Date: Initial_Date,
+          Final_Date: Final_Date,
+          Status_Id: Status_Id,
+        }),
+      })
         .then((res) => res.json())
         .then(
           (result) => {
-            if (result === "El correo ya se encuentra registrado") {
+            if (result) {
+              console.log(result);
             }
           },
           (error) => {
@@ -226,10 +235,10 @@ const EditProyect = () => {
           <Item text="Nombre del proyecto" />
           <Input
             attribute={{
-              name: "project_name",
+              name: "Project_Name",
               inputType: "text",
               ph: "",
-              defaultValue: project_name,
+              defaultValue: projectNAme,
             }}
             handleChange={handleChange}
             param={errors.project_nameError}
@@ -242,7 +251,7 @@ const EditProyect = () => {
             <Item text="Fecha de inicio" />
             <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
-              value={initial_date}
+              value={initialDate}
               onChange={handleChangeInitialDate}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -254,7 +263,7 @@ const EditProyect = () => {
             <Item text="Fecha final" />
             <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
-              value={final_date}
+              value={finalDate}
               onChange={handleChangeFinalDate}
               renderInput={(params) => <TextField {...params} />}
             />
