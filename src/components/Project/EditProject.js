@@ -33,8 +33,8 @@ const EditProyect = () => {
 
   let projectId;
   const [project_name, setProyect_name] = useState("");
-  const [initial_date, setInitial_date] = useState('');
-  const [final_date, setfinal_date] = useState('');
+  const [initial_date, setInitial_date] = useState("");
+  const [final_date, setfinal_date] = useState("");
   const [project_status, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,25 +57,28 @@ const EditProyect = () => {
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
     letters: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios,
-    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    regex_date_validator:
+      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
   };
 
   const getStoredProject = () => {
-    let url = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getStoredProject"
-    axios.get(url).then((response) => {
-      console.log(response);
-      if(response.data){
-        projectId = response.data.Project_Id;
-        setProyect_name(response.data.Project_Name);
-        setInitial_date(response.data.Initial_Date);
-        setfinal_date(response.data.Final_Date);
-        setProject_Status(response.data.Status_Id);
-        console.log(project_status);
-      }
-    }).catch((error) => {
-
-    });
-  }
+    let url =
+      "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getStoredProject";
+    axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          projectId = response.data.Project_Id;
+          setProyect_name(response.data.Project_Name);
+          setInitial_date(response.data.Initial_Date);
+          setfinal_date(response.data.Final_Date);
+          setProject_Status(response.data.Status_Id);
+          console.log(response.data.Project_Name);
+        }
+      })
+      .catch((error) => {});
+  };
 
   useEffect(() => {
     getStoredProject();
@@ -165,20 +168,32 @@ const EditProyect = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          project_id: projectId,
-          project_name: project_name,
-          initial_date: initial_date,
-          final_date: final_date,
-          status_id: project_status,
-        }),
-      })
+      let aux = JSON.stringify({
+        project_id: projectId,
+        project_name: project_name,
+        initial_date: initial_date,
+        final_date: final_date,
+        status_id: project_status,
+      });
+      console.log(aux);
+      fetch(
+        "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            project_id: projectId,
+            project_name: project_name,
+            initial_date: initial_date,
+            final_date: final_date,
+            status_id: project_status,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then(
           (result) => {
