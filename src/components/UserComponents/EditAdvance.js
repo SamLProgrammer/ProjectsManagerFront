@@ -209,7 +209,7 @@ const EditAdvance = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editAdvance", {
+      fetch("https://projectsmanagerserver-node.herokuapp.com//editAdvance", {
         method: "POST",
         headers: {
           Accept: "application/json",

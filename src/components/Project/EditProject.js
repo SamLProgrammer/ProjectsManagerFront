@@ -65,7 +65,7 @@ const EditProyect = () => {
   };
 
   const getStoredProject = () => {
-    let url = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getStoredProject";
+    let url = "https://projectsmanagerserver-node.herokuapp.com//getStoredProject";
     axios
       .get(url)
       .then((response) => {
@@ -215,7 +215,7 @@ const EditProyect = () => {
         Status_Id: Status_Id,
       });
       console.log(aux);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject", {
+      fetch("https://projectsmanagerserver-node.herokuapp.com//editProject", {
         method: "POST",
         headers: {
           Accept: "application/json",

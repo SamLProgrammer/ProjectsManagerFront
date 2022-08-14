@@ -154,7 +154,7 @@ const Proyect = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createProject", {
+      fetch("https://projectsmanagerserver-node.herokuapp.com//createProject", {
         method: "POST",
         headers: {
           Accept: "application/json",
