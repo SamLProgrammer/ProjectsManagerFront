@@ -65,7 +65,7 @@ const EditProyect = () => {
   };
 
   const getStoredProject = () => {
-    let url = "https://projectsmanagerserver-node.herokuapp.com/getStoredProject";
+    let url = "http://localhost:1337/getStoredProject";
     axios
       .get(url)
       .then((response) => {
@@ -215,7 +215,7 @@ const EditProyect = () => {
         Status_Id: Status_Id,
       });
       console.log(aux);
-      fetch("https://projectsmanagerserver-node.herokuapp.com/editProject", {
+      fetch("http://localhost:1337/editProject", {
         method: "POST",
         headers: {
           Accept: "application/json",

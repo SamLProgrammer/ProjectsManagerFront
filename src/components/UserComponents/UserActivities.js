@@ -38,7 +38,7 @@ export default class UserActivities extends Component {
   };
 
   getActivitiesUser() {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getAllActivityUser";
+    let baseUrl = "http://localhost:1337/getAllActivityUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {

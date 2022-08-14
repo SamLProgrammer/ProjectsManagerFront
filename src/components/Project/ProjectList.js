@@ -27,7 +27,7 @@ export default class ProjectList extends Component {
   }
 
   getAllProjects() {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getProjects";
+    let baseUrl = "http://localhost:1337/getProjects";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -52,7 +52,7 @@ export default class ProjectList extends Component {
   }
 
   deletProject(projectId) {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/deleteProject";
+    let baseUrl = "http://localhost:1337/deleteProject";
     axios
       .post(baseUrl, {
         project_id: projectId,        
@@ -64,7 +64,7 @@ export default class ProjectList extends Component {
   }
 
   getProjectToEdit(projectId) {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getProjectToEdit";
+    let baseUrl = "http://localhost:1337/getProjectToEdit";
     let data = {project_id: projectId}
     axios.post(baseUrl, data).then((response) => {
       console.log(response);

@@ -159,7 +159,7 @@ const Activity = (props) => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("https://projectsmanagerserver-node.herokuapp.com/createActivity", {
+      fetch("http://localhost:1337/createActivity", {
         method: "POST",
         headers: {
           Accept: "application/json",

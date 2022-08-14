@@ -29,6 +29,7 @@ const Login = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(false);
+  const [errMessage, setErrMessage] = useState("Error");
 
   const open = true;
 
@@ -43,6 +44,7 @@ const Login = () => {
       navigate("/admin");
     } else if (rol !== null) navigate("/employee");
   };
+
   function handleChange(name, value) {
     switch (name) {
       case "login_user":
@@ -60,38 +62,42 @@ const Login = () => {
     }
   }
 
-  function showErrors() {
-    setHasErrors(true);
-    setErrors({ usernameError: true, passwordError: true });
-  }
-
-  function stopIsLoading() {
-    setIsLoading(false);
-    showErrors();
-  }
-
   function handleOnClick() {
-    setIsLoading(true);
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/login";
-    let login = { login_user: login_user, user_password: user_password };
-    axios
-      .post(baseUrl, login)
-      .then((response) => {
-        console.log(response);
-        if (response.data) {
-          let ac = JSON.stringify(login);
-          localStorage.setItem("account", ac);
-          localStorage.setItem("user_id", response.data.id);
-          localStorage.setItem("user_name", response.data.user_name);
-          console.log("entro" + response.data.boss_id);
-          console.log(localStorage.getItem("user_name"));
-
-          redirectByRol(response.data.boss_id);
-        }
-      })
-      .catch((error) => {
-        console.log(error.data);
-      });
+    if (login_user.length < 1) {
+      setErrors({ usernameError: true, passwordError: false });
+    }
+    else if (user_password < 1) {
+      setErrors({ usernameError: false, passwordError: true });
+    } else {
+      setIsLoading(true);
+      let baseUrl = "http://localhost:1337/login";
+      let login = { login_user: login_user, user_password: user_password };
+      axios
+        .post(baseUrl, login)
+        .then((response) => {
+          if (response.data.user_info) {
+            let ac = JSON.stringify(login);
+            localStorage.setItem("account", ac);
+            localStorage.setItem("user_id", response.data.user_info.id);
+            localStorage.setItem("user_name", response.data.user_info.user_name);
+            console.log("entro" + response.data.user_info.boss_id);
+            console.log(localStorage.getItem("user_name"));
+            redirectByRol(response.data.user_info.boss_id);
+          } else {
+            setHasErrors(true);
+            setIsLoading(false);
+          }
+        })
+        .catch((error) => {
+          if (error.response.data) {
+            setErrMessage(error.response.data);
+          } else {
+            setErrMessage(error);
+          }
+          setHasErrors(true);
+          setIsLoading(false);
+        });
+    }
   }
 
   function clearErrorModal() {
@@ -103,11 +109,11 @@ const Login = () => {
   return (
     <>
       <div className="LoginContent">
-      <div className="login-container">
+        <div className="login-container">
           <div className="login-left-container">
             <img src={logo} alt="P-WorkFlow" width="450" />
           </div>
-          </div>
+        </div>
         <div className="Login">
           <div className="LoginHigher" />
           <div className="LoginLower">

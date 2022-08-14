@@ -46,7 +46,7 @@ export default class ActivityList extends Component {
 
   getActivitiesPerProject() {
     const cookies = new Cookies();
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getActivity";
+    let baseUrl = "http://localhost:1337/getActivity";
     let projectId = cookies.get("currentProjectId");
     let data = { project_id: projectId };
     axios
@@ -61,7 +61,7 @@ export default class ActivityList extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getUsers";
+    let baseUrl = "http://localhost:1337/getUsers";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -94,7 +94,7 @@ export default class ActivityList extends Component {
       user_id: userId,
       initial_time: new Date(),
       final_time: finalDate,}
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/assignActivityToUser";
+    let baseUrl = "http://localhost:1337/assignActivityToUser";
     axios.post(baseUrl, data);
     console.log("envio de assigment")
     console.log(data)
@@ -103,7 +103,7 @@ export default class ActivityList extends Component {
   };
 
   deleteActivity(activityId) {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/deleteActivity";
+    let baseUrl = "http://localhost:1337/deleteActivity";
     axios
       .post(baseUrl, {
          activity_id: activityId,
@@ -115,7 +115,7 @@ export default class ActivityList extends Component {
   }
 
   getActivityToEdit(activityId) {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getActivityToEdit";
+    let baseUrl = "http://localhost:1337/getActivityToEdit";
     axios.post(baseUrl, { activity_id: activityId }).then((response) => {
       // if (response.data) {
         // localStorage.setItem("activity_id", response.data.Activity_Id);
