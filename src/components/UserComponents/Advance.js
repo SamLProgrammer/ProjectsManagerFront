@@ -237,7 +237,7 @@ const Advance = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("https://projectsmanagerserver-node.herokuapp.com//createAdvance", {
+      fetch("https://projectsmanagerserver-node.herokuapp.com/createAdvance", {
         method: "POST",
         headers: {
           Accept: "application/json",

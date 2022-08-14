@@ -28,7 +28,7 @@ export default class AdvanceList extends Component {
   };
 
   getAdvacesForUser() {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com//getAdvancesByUser";
+    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {
@@ -47,7 +47,7 @@ export default class AdvanceList extends Component {
   // }
 
   getAdvancetoEdit(advanceId) {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com//getAdvanceToEdit";
+    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getAdvanceToEdit";
     console.log(advanceId)
     let data = {advance_id: advanceId}
     console.log(data)

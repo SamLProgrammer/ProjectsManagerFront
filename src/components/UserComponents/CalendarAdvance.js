@@ -21,7 +21,7 @@ export default class CalendarAdvance extends Component {
   };
 
   getAdvancesForUser() {
-    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com//getAdvancesByUser";
+    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {

@@ -145,7 +145,7 @@ const Activity = () => {
   }
 
   const getStoredActivity = () => {
-    let url = "https://projectsmanagerserver-node.herokuapp.com//getStoredActivity";
+    let url = "https://projectsmanagerserver-node.herokuapp.com/getStoredActivity";
     axios.get(url)
     .then((response) => {
       console.log(response);
@@ -207,7 +207,7 @@ const Activity = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("https://projectsmanagerserver-node.herokuapp.com//editActivity", {
+      fetch("https://projectsmanagerserver-node.herokuapp.com/editActivity", {
         method: "POST",
         headers: {
           Accept: "application/json",
