@@ -77,6 +77,7 @@ const Login = () => {
     axios
       .post(baseUrl, login)
       .then((response) => {
+        console.log(response);
         if (response.data) {
           let ac = JSON.stringify(login);
           localStorage.setItem("account", ac);
@@ -114,7 +115,7 @@ const Login = () => {
 
             {hasErrors && (
               <ModalError
-                title="A ocurrido un error!"
+                title="Ha ocurrido un error!"
                 text="Usuario o password no existe."
                 handleOnClick={clearErrorModal}
               />
