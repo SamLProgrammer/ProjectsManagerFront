@@ -72,7 +72,7 @@ const Login = () => {
       setErrors({ usernameError: false, passwordError: true });
     } else {
       setIsLoading(true);
-      let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/login";
+      let baseUrl = "http://localhost:1337/login";
       let login = { login_user: login_user, user_password: user_password };
       console.log(login);
       axios
@@ -80,11 +80,9 @@ const Login = () => {
         .then((response) => {
           if (response.data.user_info) {
             let ac = JSON.stringify(login);
-            localStorage.setItem("account", ac);
-            localStorage.setItem("user_id", response.data.user_info.id);
-            localStorage.setItem("user_name", response.data.user_info.user_name);
-            console.log("entro" + response.data.user_info.boss_id);
-            console.log(localStorage.getItem("user_name"));
+            // localStorage.setItem("account", ac);
+            // localStorage.setItem("user_id", response.data.user_info.id);
+            // localStorage.setItem("user_name", response.data.user_info.user_name);
             redirectByRol(response.data.user_info.boss_id);
           } else {
             setHasErrors(true);

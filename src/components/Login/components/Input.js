@@ -9,6 +9,8 @@ const Input = ({ attribute, handleChange, param, expresion }) => {
         name={attribute.name}
         type={attribute.inputType}
         defaultValue={attribute.defaultValue}
+        value={attribute.value}
+        autoComplete={attribute.autoComplete}
         onChange={(e) => handleChange(e.target.name, e.target.value)}
         className={param ? "errorStyle" : "regularStyle"}
       />

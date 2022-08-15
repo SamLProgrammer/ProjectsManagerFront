@@ -295,6 +295,8 @@ const CreateUser = () => {
               name: "user_name",
               inputType: "text",
               ph: "",
+              value: "",
+              defaultValue: "",
             }}
             handleChange={handleChange}
             param={errors.usernameError}
@@ -400,6 +402,8 @@ const CreateUser = () => {
               name: "phone_number",
               inputType: "text",
               ph: "",
+              defaultValue: "",
+              value: "",
             }}
             handleChange={handleChange}
             param={errors.phone_numberError}
@@ -413,7 +417,9 @@ const CreateUser = () => {
             attribute={{
               name: "password",
               inputType: "password",
-              ph: "",
+              ph:"",
+              defaultValue: "",
+              value: "",
             }}
             handleChange={handleChange}
             param={errors.passwordError}
