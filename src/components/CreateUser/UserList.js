@@ -30,7 +30,7 @@ export default class Prueba extends Component {
   }
 
   selectUser(userId) {
-    let baseUrl = 'http://localhost:1337/deleteUser'
+    let baseUrl = 'https://projectsmanagerserver-node.herokuapp.com/deleteUser'
     axios.post(baseUrl, {
         User_Id : userId})
     .then((response) => {
@@ -40,7 +40,7 @@ export default class Prueba extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://localhost:1337/getUsers";
+    let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/getUsers";
     axios
       .get(baseUrl)
       .then((response) => {
