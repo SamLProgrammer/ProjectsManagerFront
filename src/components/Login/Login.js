@@ -80,9 +80,9 @@ const Login = () => {
         .then((response) => {
           if (response.data.user_info) {
             let ac = JSON.stringify(login);
-            // localStorage.setItem("account", ac);
-            // localStorage.setItem("user_id", response.data.user_info.id);
-            // localStorage.setItem("user_name", response.data.user_info.user_name);
+            localStorage.setItem("account", ac);
+            localStorage.setItem("user_id", response.data.user_info.id);
+            localStorage.setItem("user_name", response.data.user_info.user_name);
             redirectByRol(response.data.user_info.boss_id);
           } else {
             setHasErrors(true);
