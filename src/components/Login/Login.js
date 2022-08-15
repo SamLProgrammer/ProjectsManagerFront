@@ -29,7 +29,9 @@ const Login = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(false);
-  const [errMessage, setErrMessage] = useState("Error");
+  const [errMessage, setErrMessage] = useState({
+    message: 'Error',
+  });
 
   const open = true;
 
@@ -72,6 +74,7 @@ const Login = () => {
       setIsLoading(true);
       let baseUrl = "https://projectsmanagerserver-node.herokuapp.com/login";
       let login = { login_user: login_user, user_password: user_password };
+      console.log(login);
       axios
         .post(baseUrl, login)
         .then((response) => {
@@ -90,9 +93,9 @@ const Login = () => {
         })
         .catch((error) => {
           if (error.response.data) {
-            setErrMessage(error.response.data);
+            setErrMessage({message: error.response.data.err});
           } else {
-            setErrMessage(error);
+            setErrMessage({message: JSON.stringify(error)});
           }
           setHasErrors(true);
           setIsLoading(false);
@@ -122,8 +125,9 @@ const Login = () => {
             {hasErrors && (
               <ModalError
                 title="Ha ocurrido un error!"
-                text="Usuario o password no existe."
+                text= "{errMessage.message}"
                 handleOnClick={clearErrorModal}
+                param={errMessage.message}
               />
             )}
 
